@@ -1,16 +1,19 @@
 const myLibrary = [];
 
-function Book(Title, Author, Pages, Status, CoverUrl) {
+class Book {
+    constructor (Title, Author, Pages, Status, CoverUrl) {
     this.id = crypto.randomUUID()
     this.title = Title
     this.author = Author
     this.pages = Pages
     this.status = Status
     this.coverUrl = CoverUrl || "images/default-book-cover.avif";
-    this.info = function () {
+    }
+    
+    info () {
         console.log(`${this.title} by ${this.author},${this.pages} pages,${this.status}!`)
     }
-    this.changeStatus = function () {
+    changeStatus() {
         if (this.status === "Unread") this.status = "Read"
         else {
             this.status = "Unread"
@@ -60,7 +63,6 @@ function confirmBookDeletion(bookId) {
 function addBookToLibrary(title, author, pages, selectedStatus, coverUrl) {
     const newBook = new Book(title, author, pages, selectedStatus, coverUrl)
     myLibrary.push(newBook)
-
 }
 
 function createBookCard() {
@@ -132,7 +134,6 @@ fileInput.addEventListener('change', (e) => {
         const url = URL.createObjectURL(file);
         coverPreview.style.backgroundImage = `url(${url})`;
         coverPreview.classList.add('has-image');
-        // URL.revokeObjectURL(url) - освободишь при закрытии диалога
     }
 });
 
